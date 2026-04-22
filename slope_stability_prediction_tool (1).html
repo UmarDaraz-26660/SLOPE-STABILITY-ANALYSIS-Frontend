@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap');
+  *{box-sizing:border-box;margin:0;padding:0}
+  :root{
+    --navy:#0f2a4a;--navy2:#1a3d6b;--navy3:#2356a0;
+    --blue-light:#e8f1fb;--blue-mid:#b8d4f2;
+    --slate:#4a6080;--slate-light:#6e8aaa;
+    --bg:#f4f6f9;--white:#ffffff;--border:#dce3ed;
+    --text:#1a2535;--muted:#6b7e96;
+    --green:#1e7e4b;--green-bg:#eaf5ee;
+    --yellow:#8a6800;--yellow-bg:#fef9e7;
+    --orange:#b34a00;--orange-bg:#fff0e6;
+    --red:#c0292e;--red-bg:#fdecea;
+    --shadow:0 2px 12px rgba(15,42,74,0.09);
+    --shadow-sm:0 1px 4px rgba(15,42,74,0.07);
+  }
+  body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);font-size:14px;min-height:100vh}
+  /* NAV */
+  nav{background:var(--navy);padding:0 2rem;display:flex;align-items:center;height:56px;position:sticky;top:0;z-index:100}
+  .nav-logo{color:#fff;font-weight:600;font-size:15px;letter-spacing:0.3px;display:flex;align-items:center;gap:10px}
+  .nav-logo-icon{width:28px;height:28px;background:var(--navy3);border-radius:6px;display:flex;align-items:center;justify-content:center}
+  .nav-logo-icon svg{width:16px;height:16px;fill:#7bb8f0}
+  .nav-links{display:flex;gap:4px;margin-left:2.5rem}
+  .nav-link{color:rgba(255,255,255,0.65);font-size:13.5px;padding:6px 14px;border-radius:6px;cursor:pointer;transition:all 0.18s;border:none;background:none;font-family:inherit}
+  .nav-link:hover{color:#fff;background:rgba(255,255,255,0.08)}
+  .nav-link.active{color:#fff;background:rgba(255,255,255,0.13)}
+  .nav-badge{margin-left:auto;background:var(--navy3);color:#7bb8f0;font-size:11px;padding:3px 10px;border-radius:20px;font-weight:500}
+  /* PAGES */
+  .page{display:none;animation:fadeIn 0.25s ease}
+  .page.active{display:block}
+  @keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+  /* HOME PAGE */
+.home-hero{
+  background: linear-gradient(135deg,#0b1f3a 0%, #123a6b 60%, #1f4d8f 100%);
+  padding: 5rem 2rem 3rem;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+
+.hero-top{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  max-width:1100px;
+  margin:0 auto 2rem;
+}
+
+.hero-logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:600;
+
+}
+
+.hero-logo img{
+  height:100px;
+    border-radius: 5%;
+
+}
+
+.hero-title{
+  font-size:2.5rem;
+  font-weight:700;
+  line-height:1.2;
+  letter-spacing:1px;
+}
+
+.hero-sub{
+  font-size:1rem;
+  color:rgba(255,255,255,0.75);
+  margin:1rem auto 2rem;
+  max-width:600px;
+}
+
+.hero-buttons{
+  display:flex;
+  justify-content:center;
+  gap:12px;
+}
+
+.hero-btn-primary{
+  background:#3b82f6;
+  color:#fff;
+  padding:12px 28px;
+  border-radius:8px;
+  border:none;
+  font-weight:600;
+  cursor:pointer;
+}
+
+.hero-btn-secondary{
+  background:transparent;
+  border:1px solid rgba(255,255,255,0.3);
+  color:#fff;
+  padding:12px 20px;
+  border-radius:8px;
+  cursor:pointer;
+}
+
+/* Contributors */
+.contributors{
+  margin-top:3rem;
+}
+
+.contributors h3{
+  font-size:1rem;
+  letter-spacing:1px;
+  margin-bottom:1rem;
+  color:rgba(255,255,255,0.8);
+}
+
+.contributor-list{
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+
+.contributor{
+  text-align:center;
+}
+
+.contributor img{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid white;
+}
+  /* INFO PAGE */
+  .info-wrap{max-width:860px;margin:0 auto;padding:2rem}
+  .info-section{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.25rem;box-shadow:var(--shadow-sm)}
+  .info-section h2{font-size:15px;font-weight:600;color:var(--navy);margin-bottom:0.75rem;padding-bottom:0.6rem;border-bottom:1px solid var(--border)}
+  .info-section p{font-size:13.5px;color:var(--text);line-height:1.75;margin-bottom:0.6rem}
+  .fos-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:0.75rem}
+  .fos-table th{background:var(--navy);color:#fff;padding:8px 12px;text-align:left;font-weight:500}
+  .fos-table td{padding:8px 12px;border-bottom:1px solid var(--border)}
+  .fos-table tr:nth-child(even) td{background:var(--bg)}
+  .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:11.5px;font-weight:500}
+  .badge-danger{background:var(--red-bg);color:var(--red)}
+  .badge-warning{background:var(--orange-bg);color:var(--orange)}
+  .badge-moderate{background:var(--yellow-bg);color:var(--yellow)}
+  .badge-safe{background:var(--green-bg);color:var(--green)}
+  /* ANALYSIS PAGE */
+  .analysis-header{padding:1.25rem 2rem 0.75rem;border-bottom:1px solid var(--border);background:var(--white)}
+  .analysis-header h1{font-size:16px;font-weight:600;color:var(--text)}
+  .analysis-header p{font-size:12.5px;color:var(--muted);margin-top:2px}
+  .analysis-layout{display:grid;grid-template-columns:300px 1fr;gap:1.25rem;padding:1.25rem;align-items:start}
+  /* LEFT PANEL */
+  .left-panel{background:#e8f1fb;border:1px solid #b8d4f2;border-radius:12px;padding:1.25rem;box-shadow:var(--shadow-sm)}
+  .panel-title{font-size:13px;font-weight:600;color:var(--navy);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:1rem;display:flex;align-items:center;gap:6px}
+  .panel-title svg{width:14px;height:14px;fill:var(--navy3)}
+  .input-group{margin-bottom:0.85rem}
+  .input-label{font-size:12.5px;color:var(--slate);font-weight:500;margin-bottom:4px;display:block}
+  .input-row{display:flex;align-items:center;gap:8px}
+  .eng-input{width:100%;padding:7px 10px;border:1px solid var(--blue-mid);border-radius:7px;font-size:13.5px;font-family:'DM Mono',monospace;background:#fff;color:var(--text);outline:none;transition:border 0.15s}
+  .eng-input:focus{border-color:var(--navy3);box-shadow:0 0 0 2px rgba(35,86,160,0.12)}
+  .unit-badge{font-size:11px;color:var(--slate-light);white-space:nowrap;font-family:'DM Mono',monospace}
+  .divider{height:1px;background:var(--blue-mid);margin:1rem 0}
+  .gw-title{font-size:12.5px;color:var(--slate);font-weight:600;margin-bottom:0.6rem}
+  .slider-wrap{padding:0.25rem 0}
+  .slider-labels{display:flex;justify-content:space-between;margin-top:6px}
+  .slider-label-item{font-size:9.5px;color:var(--muted);text-align:center;max-width:52px;line-height:1.3}
+  .gw-slider{width:100%;accent-color:var(--navy3);cursor:pointer}
+  .gw-current{font-size:12px;color:var(--navy);font-weight:600;margin-top:6px;text-align:center;padding:4px 8px;background:rgba(35,86,160,0.08);border-radius:6px}
+  .predict-btn{width:100%;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-weight:600;font-size:13.5px;cursor:pointer;font-family:inherit;margin-top:1rem;transition:all 0.18s;letter-spacing:0.2px}
+  .predict-btn:hover{background:var(--navy2);transform:translateY(-1px)}
+  /* RIGHT: OUTPUT */
+  .right-col{display:flex;flex-direction:column;gap:1.25rem}
+  .output-panel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow)}
+  .output-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:0.75rem}
+  .fos-display{display:flex;align-items:baseline;gap:10px;margin-bottom:0.25rem}
+  .fos-label{font-size:13px;color:var(--slate);font-weight:500}
+  .fos-value{font-size:3rem;font-weight:600;color:var(--navy);font-family:'DM Mono',monospace;line-height:1}
+  .fos-value.danger{color:var(--red)}
+  .fos-value.critical{color:var(--orange)}
+  .fos-value.moderate{color:var(--yellow)}
+  .fos-value.safe{color:var(--green)}
+  .analysis-time{font-size:11.5px;color:var(--muted);margin-top:4px;font-family:'DM Mono',monospace}
+  /* RISK BAR */
+  .risk-section{margin-top:1.25rem}
+  .risk-bar-wrap{position:relative;height:10px;border-radius:10px;overflow:hidden;display:flex;margin:0.5rem 0}
+  .risk-seg{flex:1;transition:filter 0.2s}
+  .risk-seg.danger{background:#e24b4a}
+  .risk-seg.critical{background:#e07a10}
+  .risk-seg.moderate{background:#d4a017}
+  .risk-seg.safe{background:#1e7e4b}
+  .risk-indicator{position:absolute;top:-3px;width:16px;height:16px;background:var(--navy);border-radius:50%;border:2px solid #fff;transform:translateX(-50%);transition:left 0.4s ease;box-shadow:0 1px 4px rgba(0,0,0,0.2)}
+  .risk-legend{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin-top:10px}
+  .legend-item{border-radius:7px;padding:7px 8px;text-align:center}
+  .legend-item.danger{background:var(--red-bg);border:1px solid #f09595}
+  .legend-item.critical{background:var(--orange-bg);border:1px solid #fac775}
+  .legend-item.moderate{background:var(--yellow-bg);border:1px solid #EF9F27}
+  .legend-item.safe{background:var(--green-bg);border:1px solid #97c459}
+  .legend-label{font-size:11px;font-weight:600}
+  .legend-label.danger{color:var(--red)}
+  .legend-label.critical{color:var(--orange)}
+  .legend-label.moderate{color:var(--yellow)}
+  .legend-label.safe{color:var(--green)}
+  .legend-range{font-size:10px;color:var(--muted);margin-top:2px;font-family:'DM Mono',monospace}
+  .stability-box{margin-top:1rem;padding:0.85rem 1rem;border-radius:8px;border:1px solid transparent;font-size:13.5px;font-weight:500;line-height:1.5}
+  .stability-box.danger{background:var(--red-bg);border-color:#f09595;color:var(--red)}
+  .stability-box.critical{background:var(--orange-bg);border-color:#fac775;color:var(--orange)}
+  .stability-box.moderate{background:var(--yellow-bg);border-color:#EF9F27;color:var(--yellow)}
+  .stability-box.safe{background:var(--green-bg);border-color:#97c459;color:var(--green)}
+  /* SENSITIVITY */
+  .sens-panel{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:1.5rem;box-shadow:var(--shadow)}
+  .sens-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem}
+  .sens-title{font-size:13px;font-weight:600;color:var(--text)}
+  .x-select{padding:6px 10px;border:1px solid var(--border);border-radius:7px;font-size:13px;font-family:inherit;color:var(--text);background:#fff;cursor:pointer;outline:none}
+  canvas{width:100%!important;max-height:200px}
+  .download-btn{margin-top:1rem;padding:8px 16px;background:var(--bg);border:1px solid var(--border);border-radius:7px;font-size:12.5px;font-weight:600;color:var(--navy);cursor:pointer;font-family:inherit;display:flex;align-items:center;gap:6px;transition:all 0.15s}
+  .download-btn:hover{background:var(--blue-light);border-color:var(--blue-mid)}
+  .download-btn svg{width:14px;height:14px;fill:var(--navy3)}
+  .placeholder-msg{text-align:center;padding:2.5rem 1rem;color:var(--muted);font-size:13px}
+  .placeholder-msg svg{width:36px;height:36px;fill:var(--blue-mid);margin:0 auto 0.75rem;display:block}
+</style>
+</head>
+
+
+<body>
+  
+
+<nav>
+  <div class="nav-logo">
+    <div class="nav-logo-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+    SlopeAI
+  </div>
+  <div class="nav-links">
+    <!-- <button class="nav-link active" onclick="showPage('home')">Home</button>
+    <button class="nav-link" onclick="showPage('info')">Info</button>
+    <button class="nav-link" onclick="showPage('analysis')">Analysis</button> -->
+    <button class="nav-link active" onclick="showPage('home', this)">Home</button>
+<button class="nav-link" onclick="showPage('info', this)">Info</button>
+<button class="nav-link" onclick="showPage('analysis', this)">Analysis</button>
+  </div>
+  <div class="nav-badge">XGBoost v1.0</div>
+</nav>
+
+
+<div id="page-home" class="page active">
+  <div class="home-hero">
+
+    <!-- TOP LOGOS -->
+    <div class="hero-top">
+      <div class="hero-logo">
+        <img src="images/SCEE.png" alt="">
+      </div>
+
+      <div class="hero-logo">
+        <img src="images/logo2.jpeg" alt="">
+      </div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="hero-title">
+      ELEVATING SLOPE <br> STABILITY ANALYSIS
+    </div>
+
+    <p class="hero-sub">
+      ML-powered geotechnical assessment using XGBoost regression. Instantly predict Factor of Safety with full sensitivity analysis and risk classification.
+    </p>
+
+    <!-- BUTTONS -->
+    <div class="hero-buttons">
+      <button class="hero-btn-primary" onclick="showPage('analysis')">
+        Open Analysis Tool →
+      </button>
+      <button class="hero-btn-secondary" onclick="showPage('info')" >
+        Learn More
+      </button>
+    </div>
+
+    <!-- CONTRIBUTORS -->
+    <div class="contributors">
+      <h3>KEY CONTRIBUTORS</h3>
+
+      <div class="contributor-list">
+        <div class="contributor">
+          <img src="images/user1.jpeg">
+        </div>
+        <div class="contributor">
+          <img src="images/user4.jpeg">
+        </div>
+        <div class="contributor">
+          <img src="images/user3.jpeg">
+        </div>
+        <div class="contributor">
+          <img src="images/user2.jpeg">
+        </div>
+        <div class="contributor">
+          <img src="images/user5.jpeg">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- INFO PAGE -->
+<div id="page-info" class="page">
+  <div class="info-wrap">
+    <div class="info-section">
+      <h2>What is the Factor of Safety (FoS)?</h2>
+      <p>The Factor of Safety is the ratio of the resisting forces (shear strength) to the driving forces (shear stress) acting on a slope. A FoS ≥ 1.5 is generally considered stable for most engineering applications. Values below 1.0 indicate that failure has already occurred or is imminent.</p>
+      <p>This tool uses a trained XGBoost machine learning model to predict FoS from five key geotechnical parameters, providing rapid assessment without requiring full limit equilibrium analysis.</p>
+    </div>
+    <div class="info-section">
+      <h2>Risk Classification</h2>
+      <table class="fos-table">
+        <tr><th>FoS Range</th><th>Classification</th><th>Status</th><th>Recommended Action</th></tr>
+        <tr><td style="font-family:'DM Mono',monospace">FoS &lt; 1.0</td><td><span class="badge badge-danger">Danger</span></td><td>Failure likely</td><td>Immediate remediation required</td></tr>
+        <tr><td style="font-family:'DM Mono',monospace">1.0 – 1.25</td><td><span class="badge badge-warning">Critical</span></td><td>Marginally stable</td><td>Engineering review + monitoring</td></tr>
+        <tr><td style="font-family:'DM Mono',monospace">1.25 – 1.5</td><td><span class="badge badge-moderate">Moderate</span></td><td>Conditionally stable</td><td>Continuous monitoring advised</td></tr>
+        <tr><td style="font-family:'DM Mono',monospace">FoS &gt; 1.5</td><td><span class="badge badge-safe">Safe</span></td><td>Stable</td><td>Routine inspection only</td></tr>
+      </table>
+    </div>
+    <div class="info-section">
+      <h2>Input Parameters</h2>
+      <p><strong>Slope Height H (m):</strong> Vertical height of the slope from toe to crest. Taller slopes exert greater gravitational force and reduce stability.</p>
+      <p><strong>Slope Angle β (°):</strong> Angle of the slope face measured from horizontal. Steeper slopes are generally less stable.</p>
+      <p><strong>Cohesion c (kPa):</strong> Inherent shear strength of the soil independent of normal stress. Higher cohesion improves stability.</p>
+      <p><strong>Friction Angle φ (°):</strong> Angle of internal friction of the soil. Higher values indicate greater shear resistance.</p>
+      <p><strong>Unit Weight γ (kN/m³):</strong> Weight of soil per unit volume. Affects the magnitude of driving and resisting forces.</p>
+      <p><strong>Groundwater Condition:</strong> Presence and level of water table. Groundwater increases pore pressure, reducing effective stress and stability.</p>
+    </div>
+    <div class="info-section">
+      <h2>Model Information</h2>
+      <p>The prediction engine uses XGBoost (Extreme Gradient Boosting) with the following configuration: 130 estimators, max depth 2, learning rate 0.05, L1 regularization (α=0.1). The model was validated using 5-fold cross-validation and tested on a held-out dataset.</p>
+      <p>The sensitivity analysis feature varies one parameter across its physical range while holding all others constant at your entered values — this reveals which parameters most significantly influence the predicted FoS for your specific slope geometry.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ANALYSIS PAGE -->
+<div id="page-analysis" class="page">
+  <div class="analysis-header">
+    <h1>Slope Stability Analysis</h1>
+    <p>Enter geotechnical parameters on the left. Predicted FoS and sensitivity analysis update on the right.</p>
+  </div>
+  <div class="analysis-layout">
+    <!-- LEFT PANEL -->
+    <div class="left-panel">
+      <div class="panel-title">
+        <svg viewBox="0 0 24 24"><path d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"/></svg>
+        Input Parameters
+      </div>
+      <div class="input-group">
+        <label class="input-label">Slope Height H</label>
+        <div class="input-row">
+          <input type="number" class="eng-input" id="inp-H" value="10" min="1" max="100" step="0.5" oninput="onInputChange()">
+          <span class="unit-badge">m</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Slope Angle β</label>
+        <div class="input-row">
+          <input type="number" class="eng-input" id="inp-beta" value="30" min="5" max="85" step="1" oninput="onInputChange()">
+          <span class="unit-badge">°</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Cohesion c</label>
+        <div class="input-row">
+          <input type="number" class="eng-input" id="inp-c" value="20" min="0" max="200" step="1" oninput="onInputChange()">
+          <span class="unit-badge">kPa</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Friction Angle φ</label>
+        <div class="input-row">
+          <input type="number" class="eng-input" id="inp-phi" value="25" min="0" max="45" step="0.5" oninput="onInputChange()">
+          <span class="unit-badge">°</span>
+        </div>
+      </div>
+      <div class="input-group">
+        <label class="input-label">Unit Weight γ</label>
+        <div class="input-row">
+          <input type="number" class="eng-input" id="inp-gamma" value="18" min="12" max="25" step="0.5" oninput="onInputChange()">
+          <span class="unit-badge">kN/m³</span>
+        </div>
+      </div>
+      <div class="divider"></div>
+      <div class="gw-title">Groundwater Condition</div>
+      <div class="slider-wrap">
+        <input type="range" class="gw-slider" id="gw-slider" min="0" max="4" step="1" value="0" oninput="onGwChange()">
+        <div class="slider-labels">
+          <div class="slider-label-item">No water table</div>
+          <div class="slider-label-item">Partially saturated</div>
+          <div class="slider-label-item">Mid-level</div>
+          <div class="slider-label-item">High water table</div>
+          <div class="slider-label-item">Fully saturated</div>
+        </div>
+        <div class="gw-current" id="gw-label">No water table</div>
+      </div>
+      <button class="predict-btn" onclick="runPrediction()">Run Prediction →</button>
+    </div>
+
+    <!-- RIGHT COLUMN -->
+    <div class="right-col">
+      <!-- OUTPUT PANEL -->
+      <div class="output-panel">
+        <div class="output-title">Output Results</div>
+        <div class="fos-display">
+          <span class="fos-label">Factor of Safety =</span>
+          <span class="fos-value safe" id="fos-val">—</span>
+        </div>
+        <div class="analysis-time" id="analysis-time">Analysis time: — ms</div>
+
+        <div class="risk-section">
+          <div style="font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px">Risk Indicator</div>
+          <div class="risk-bar-wrap" id="risk-bar">
+            <div class="risk-seg danger" style="flex:0.25"></div>
+            <div class="risk-seg critical" style="flex:0.25"></div>
+            <div class="risk-seg moderate" style="flex:0.25"></div>
+            <div class="risk-seg safe" style="flex:0.25"></div>
+            <div class="risk-indicator" id="risk-dot" style="left:85%;display:none"></div>
+          </div>
+          <div class="risk-legend">
+            <div class="legend-item danger">
+              <div class="legend-label danger">Danger</div>
+              <div class="legend-range">FoS &lt; 1.0</div>
+            </div>
+            <div class="legend-item critical">
+              <div class="legend-label critical">Critical</div>
+              <div class="legend-range">1.0 – 1.25</div>
+            </div>
+            <div class="legend-item moderate">
+              <div class="legend-label moderate">Moderate</div>
+              <div class="legend-range">1.25 – 1.5</div>
+            </div>
+            <div class="legend-item safe">
+              <div class="legend-label safe">Safe</div>
+              <div class="legend-range">FoS &gt; 1.5</div>
+            </div>
+          </div>
+          <div class="stability-box safe" id="stability-box" style="display:none"></div>
+        </div>
+      </div>
+
+      <!-- SENSITIVITY PANEL -->
+      <div class="sens-panel">
+        <div class="sens-header">
+          <div class="sens-title">Factor of Safety — Sensitivity Analysis</div>
+          <select class="x-select" id="x-param" onchange="updateSensChart()">
+            <option value="H">Slope Height H (m)</option>
+            <option value="beta">Slope Angle β (°)</option>
+            <option value="c">Cohesion c (kPa)</option>
+            <option value="phi">Friction Angle φ (°)</option>
+            <option value="gamma">Unit Weight γ (kN/m³)</option>
+            <option value="gw">Groundwater Condition</option>
+          </select>
+        </div>
+        <div id="chart-placeholder" class="placeholder-msg">
+          <svg viewBox="0 0 24 24"><path d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18v12a1 1 0 01-1 1H4a1 1 0 01-1-1V4z"/></svg>
+          Run a prediction first to generate the sensitivity curve.
+        </div>
+        <canvas id="sens-chart" style="display:none"></canvas>
+        <div style="display:flex;justify-content:flex-end;margin-top:0.75rem">
+          <button class="download-btn" onclick="downloadReport()">
+            <svg viewBox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+            Download Engineering Report (PDF)
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<script src="script.js"></script>
+
+  
+</body>
+</html>
